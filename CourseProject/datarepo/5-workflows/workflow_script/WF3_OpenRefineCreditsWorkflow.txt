@@ -1,0 +1,37 @@
+'''
+@begin TMDB_Credits_Datacleaning_Using_OpenRefine @desc Cleaning movies dataset using OpenRefine tool
+@in tmdb_5000_credits.csv @uri file://tmdb_5000_credits.csv
+
+#1
+@begin LoadDataUsingOpenRefine @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in tmdb_5000_credits.csv @uri file://tmdb_5000_credits.csv
+@out credits_data_in_openrefine_workspace
+@end LoadDataUsingOpenRefine
+
+@begin IdentifyColumnsToCleanUsingOpenRefine @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in credits_data_in_openrefine_workspace
+@out cast
+@out crew
+@end IdentifyColumnsToCleanUsingOpenRefine
+
+@begin Create-CloneOfExistingColumn-Cast @desc Add new column with colon seperated crew names
+@in cast
+@out cast_charactername_actorname
+@end   Create-CloneOfExistingColumn-Cast
+
+@begin Create-CloneOfExistingColumn-Crew @desc Add new column with colon seperated crew names
+@in crew
+@out crew_crewname_job
+@end   Create-CloneOfExistingColumn-Crew
+
+@begin AddNewProcessedColumnsToCreditsDataset @desc Add 'cast_charactername_actorname' and 'crew_crewname_job' to tmdb_5000_credits.csv
+@in tmdb_5000_credits.csv @uri file://tmdb_5000_credits.csv
+@in cast_charactername_actorname
+@in crew_crewname_job
+@out tmdb_5000_credits_OpenRefineProcessed.csv @uri file://tmdb_5000_credits_OpenRefineProcessed.csv
+@end AddNewProcessedColumnsToCreditsDataset
+
+@out tmdb_5000_credits_OpenRefineProcessed.csv @uri file://tmdb_5000_credits_OpenRefineProcessed.csv
+
+@end TMDB_Credits_Datacleaning_Using_OpenRefine
+'''

@@ -1,0 +1,114 @@
+
+/* Start of top-level graph */
+digraph Workflow {
+rankdir=TB
+
+/* Title for graph */
+fontname=Helvetica; fontsize=18; labelloc=t
+label=Overall_TMDB_MoviesDataset_Cleaning
+
+/* Start of double cluster for drawing box around nodes in workflow */
+subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
+subgraph cluster_workflow_box_inner { label=""; penwidth=0
+
+/* Style for nodes representing atomic programs in workflow */
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Helvetica]
+
+/* Nodes representing atomic programs in workflow */
+CleaningMoviesDataUsingOpenRefine [shape=record rankdir=LR label="{<f0> CleaningMoviesDataUsingOpenRefine |<f1> Use OpenRefine to clean tmdb_5000_movies.csv}"];
+CleaningMoviesDataUsingPandasAndTmdbAPI [shape=record rankdir=LR label="{<f0> CleaningMoviesDataUsingPandasAndTmdbAPI |<f1> Used Pandas and TMDB-REST-API to clean/update tmdb_5000_movies.csv}"];
+CreateSQLiteMoviesTable [shape=record rankdir=LR label="{<f0> CreateSQLiteMoviesTable |<f1> Define schema(without constraints) and load movies-data}"];
+CleaningCreditsDataUsingOpenRefine [shape=record rankdir=LR label="{<f0> CleaningCreditsDataUsingOpenRefine |<f1> Use OpenRefine to clean tmdb_5000_credits.csv}"];
+CleaningCreditsDataUsingPandas [shape=record rankdir=LR label="{<f0> CleaningCreditsDataUsingPandas |<f1> Use Pandas to create two new tables from the JSON data of 'Cast' and 'Crew' columns}"];
+CreateSQLiteCreditsTable [shape=record rankdir=LR label="{<f0> CreateSQLiteCreditsTable |<f1> Define schema(without constraints) and load credits data}"];
+CreateSQLiteCreditsCastTable [shape=record rankdir=LR label="{<f0> CreateSQLiteCreditsCastTable |<f1> Define schema(without constraints) and load credits-cast data}"];
+CreateSQLiteCreditsCrewTable [shape=record rankdir=LR label="{<f0> CreateSQLiteCreditsCrewTable |<f1> Define schema(without constraints) and load crdits-crew data}"];
+
+/* Style for nodes representing composite programs (sub-workflows) in workflow */
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=2 fontname=Helvetica]
+
+/* Nodes representing composite programs (sub-workflows) in workflow */
+SQLConstraintsCheckMoviesData [shape=record rankdir=LR label="{<f0> SQLConstraintsCheckMoviesData |<f1> Check SQL data/referential integrity constraints- Movies}"];
+SQLConstraintsCheckCreditsData [shape=record rankdir=LR label="{<f0> SQLConstraintsCheckCreditsData |<f1> Check SQL data/referential integrity constraints - Credits}"];
+SQLConstraintsCheckCreditsCastData [shape=record rankdir=LR label="{<f0> SQLConstraintsCheckCreditsCastData |<f1> Check SQL data/referential integrity constraints - Credits}"];
+SQLConstraintsCheckCreditsCrewData [shape=record rankdir=LR label="{<f0> SQLConstraintsCheckCreditsCrewData |<f1> Check SQL data/referential integrity constraints - Credits}"];
+
+/* Style for nodes representing non-parameter data channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
+
+/* Nodes for non-parameter data channels in workflow */
+"tmdb_5000_movies.csv" [shape=record rankdir=LR label="{<f0> tmdb_5000_movies.csv |<f1> file\://tmdb_5000_movies.csv}"];
+"tmdb_5000_movies-OpenRefineProcessed.csv" [shape=record rankdir=LR label="{<f0> tmdb_5000_movies-OpenRefineProcessed.csv |<f1> file\://tmdb_5000_movies-OpenRefineProcessed.csv}"];
+"tmdb_5000_movies-OpenRefine-Pandas-Processed.csv" [shape=record rankdir=LR label="{<f0> tmdb_5000_movies-OpenRefine-Pandas-Processed.csv |<f1> file\://tmdb_5000_movies-OpenRefine-Pandas-Processed.csv}"];
+movies [shape=record rankdir=LR label="{<f0> movies |<f1> sqlite\://cs513-moviesdb/tbl_movies}"];
+"tmdb_5000_credits.csv" [shape=record rankdir=LR label="{<f0> tmdb_5000_credits.csv |<f1> file\://tmdb_5000_credits.csv}"];
+"tmdb_5000_credits-OpenRefineProcessed.csv" [shape=record rankdir=LR label="{<f0> tmdb_5000_credits-OpenRefineProcessed.csv |<f1> file\://tmdb_5000_credits-OpenRefineProcessed.csv}"];
+"tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv" [shape=record rankdir=LR label="{<f0> tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv |<f1> file\://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv}"];
+"tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv" [shape=record rankdir=LR label="{<f0> tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv |<f1> file\://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv}"];
+credits [shape=record rankdir=LR label="{<f0> credits |<f1> sqlite\://cs513-moviesdb/tbl_credits}"];
+credits_cast [shape=record rankdir=LR label="{<f0> credits_cast |<f1> sqlite\://cs513-moviesdb/tbl_credits_cast}"];
+credits_crew [shape=record rankdir=LR label="{<f0> credits_crew |<f1> sqlite\://cs513-moviesdb/tbl_credits_crew}"];
+
+/* Style for nodes representing parameter channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
+
+/* Nodes representing parameter channels in workflow */
+
+/* Edges representing connections between programs and channels */
+CleaningMoviesDataUsingOpenRefine -> "tmdb_5000_movies-OpenRefineProcessed.csv"
+"tmdb_5000_movies.csv" -> CleaningMoviesDataUsingOpenRefine
+CleaningMoviesDataUsingPandasAndTmdbAPI -> "tmdb_5000_movies-OpenRefine-Pandas-Processed.csv"
+"tmdb_5000_movies-OpenRefineProcessed.csv" -> CleaningMoviesDataUsingPandasAndTmdbAPI
+CreateSQLiteMoviesTable -> movies
+"tmdb_5000_movies-OpenRefine-Pandas-Processed.csv" -> CreateSQLiteMoviesTable
+SQLConstraintsCheckMoviesData -> movies
+movies -> SQLConstraintsCheckMoviesData
+CleaningCreditsDataUsingOpenRefine -> "tmdb_5000_credits-OpenRefineProcessed.csv"
+"tmdb_5000_credits.csv" -> CleaningCreditsDataUsingOpenRefine
+CleaningCreditsDataUsingPandas -> "tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv"
+CleaningCreditsDataUsingPandas -> "tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv"
+"tmdb_5000_credits-OpenRefineProcessed.csv" -> CleaningCreditsDataUsingPandas
+CreateSQLiteCreditsTable -> credits
+"tmdb_5000_credits-OpenRefineProcessed.csv" -> CreateSQLiteCreditsTable
+CreateSQLiteCreditsCastTable -> credits_cast
+"tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv" -> CreateSQLiteCreditsCastTable
+CreateSQLiteCreditsCrewTable -> credits_crew
+"tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv" -> CreateSQLiteCreditsCrewTable
+SQLConstraintsCheckCreditsData -> credits
+credits -> SQLConstraintsCheckCreditsData
+SQLConstraintsCheckCreditsCastData -> credits_cast
+credits_cast -> SQLConstraintsCheckCreditsCastData
+SQLConstraintsCheckCreditsCrewData -> credits_crew
+credits_crew -> SQLConstraintsCheckCreditsCrewData
+
+/* End of double cluster for drawing box around nodes in workflow */
+}}
+
+/* Style for nodes representing workflow input ports */
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+
+/* Nodes representing workflow input ports */
+"tmdb_5000_movies.csv_input_port" [label=""]
+"tmdb_5000_credits.csv_input_port" [label=""]
+
+/* Style for nodes representing workflow output ports */
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+
+/* Nodes representing workflow output ports */
+movies_output_port [label=""]
+credits_output_port [label=""]
+credits_cast_output_port [label=""]
+credits_crew_output_port [label=""]
+
+/* Edges from input ports to channels */
+"tmdb_5000_movies.csv_input_port" -> "tmdb_5000_movies.csv"
+"tmdb_5000_credits.csv_input_port" -> "tmdb_5000_credits.csv"
+
+/* Edges from channels to output ports */
+movies -> movies_output_port
+credits -> credits_output_port
+credits_cast -> credits_cast_output_port
+credits_crew -> credits_crew_output_port
+
+/* End of top-level graph */
+}

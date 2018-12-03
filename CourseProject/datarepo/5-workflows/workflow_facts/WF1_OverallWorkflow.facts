@@ -1,0 +1,428 @@
+
+% FACT: program(program_id, program_name, qualified_program_name, begin_annotation_id, end_annotation_id).
+program(1, 'Overall_TMDB_MoviesDataset_Cleaning', 'Overall_TMDB_MoviesDataset_Cleaning', 1, 101).
+program(2, 'CleaningMoviesDataUsingOpenRefine', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningMoviesDataUsingOpenRefine', 7, 13).
+program(3, 'CleaningMoviesDataUsingPandas', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningMoviesDataUsingPandas', 14, 20).
+program(4, 'CreateSQLiteMoviesTable', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteMoviesTable', 21, 27).
+program(5, 'CleaningCreditsDataUsingOpenRefine', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningCreditsDataUsingOpenRefine', 28, 34).
+program(6, 'CleaningCreditsDataUsingPandas', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningCreditsDataUsingPandas', 35, 43).
+program(7, 'CreateSQLiteCreditsTable', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteCreditsTable', 44, 50).
+program(8, 'CreateSQLiteCreditsCastTable', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteCreditsCastTable', 51, 57).
+program(9, 'CreateSQLiteCreditsCrewTable', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteCreditsCrewTable', 58, 64).
+program(10, 'SQLConstraintsCheckMoviesData', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckMoviesData', 65, 71).
+program(11, 'SQLConstraintsCheckCreditsData', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckCreditsData', 72, 78).
+program(12, 'SQLConstraintsCheckCreditsCastData', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckCreditsCastData', 79, 85).
+program(13, 'SQLConstraintsCheckCreditsCrewData', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckCreditsCrewData', 86, 92).
+
+% FACT: workflow(program_id).
+workflow(1).
+workflow(10).
+workflow(11).
+workflow(12).
+workflow(13).
+
+% FACT: function(program_id).
+
+% FACT: has_subprogram(program_id, subprogram_id).
+has_subprogram(1, 2).
+has_subprogram(1, 3).
+has_subprogram(1, 4).
+has_subprogram(1, 5).
+has_subprogram(1, 6).
+has_subprogram(1, 7).
+has_subprogram(1, 8).
+has_subprogram(1, 9).
+has_subprogram(1, 10).
+has_subprogram(1, 11).
+has_subprogram(1, 12).
+has_subprogram(1, 13).
+
+% FACT: port(port_id, port_type, port_name, qualified_port_name, port_annotation_id, data_id).
+port(1, 'in', 'tmdb_5000_movies.csv', 'Overall_TMDB_MoviesDataset_Cleaning<-tmdb_5000_movies.csv', 3, 1).
+port(2, 'in', 'tmdb_5000_credits.csv', 'Overall_TMDB_MoviesDataset_Cleaning<-tmdb_5000_credits.csv', 5, 2).
+port(40, 'out', 'movies', 'Overall_TMDB_MoviesDataset_Cleaning->movies', 93, 14).
+port(41, 'out', 'credits', 'Overall_TMDB_MoviesDataset_Cleaning->credits', 95, 15).
+port(42, 'out', 'credits_cast', 'Overall_TMDB_MoviesDataset_Cleaning->credits_cast', 97, 16).
+port(43, 'out', 'credits_crew', 'Overall_TMDB_MoviesDataset_Cleaning->credits_crew', 99, 17).
+port(3, 'in', 'tmdb_5000_movies.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningMoviesDataUsingOpenRefine<-tmdb_5000_movies.csv', 9, 3).
+port(4, 'out', 'tmdb_5000_movies-OpenRefineProcessed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningMoviesDataUsingOpenRefine->tmdb_5000_movies-OpenRefineProcessed.csv', 11, 4).
+port(5, 'in', 'tmdb_5000_movies-OpenRefineProcessed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningMoviesDataUsingPandas<-tmdb_5000_movies-OpenRefineProcessed.csv', 16, 4).
+port(6, 'out', 'tmdb_5000_movies-OpenRefine-Pandas-Processed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningMoviesDataUsingPandas->tmdb_5000_movies-OpenRefine-Pandas-Processed.csv', 18, 5).
+port(7, 'in', 'tmdb_5000_movies-OpenRefine-Pandas-Processed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteMoviesTable<-tmdb_5000_movies-OpenRefine-Pandas-Processed.csv', 23, 5).
+port(8, 'out', 'movies', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteMoviesTable->movies', 25, 6).
+port(9, 'in', 'tmdb_5000_credits.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningCreditsDataUsingOpenRefine<-tmdb_5000_credits.csv', 30, 7).
+port(10, 'out', 'tmdb_5000_credits-OpenRefineProcessed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningCreditsDataUsingOpenRefine->tmdb_5000_credits-OpenRefineProcessed.csv', 32, 8).
+port(11, 'in', 'tmdb_5000_credits-OpenRefineProcessed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningCreditsDataUsingPandas<-tmdb_5000_credits-OpenRefineProcessed.csv', 37, 8).
+port(12, 'out', 'tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningCreditsDataUsingPandas->tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv', 39, 9).
+port(13, 'out', 'tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CleaningCreditsDataUsingPandas->tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv', 41, 10).
+port(14, 'in', 'tmdb_5000_credits-OpenRefineProcessed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteCreditsTable<-tmdb_5000_credits-OpenRefineProcessed.csv', 46, 8).
+port(15, 'out', 'credits', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteCreditsTable->credits', 48, 11).
+port(16, 'in', 'tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteCreditsCastTable<-tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv', 53, 9).
+port(17, 'out', 'credits_cast', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteCreditsCastTable->credits_cast', 55, 12).
+port(18, 'in', 'tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteCreditsCrewTable<-tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv', 60, 10).
+port(31, 'out', 'credits_crew', 'Overall_TMDB_MoviesDataset_Cleaning.CreateSQLiteCreditsCrewTable->credits_crew', 62, 13).
+port(32, 'in', 'movies', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckMoviesData<-movies', 67, 6).
+port(33, 'out', 'movies', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckMoviesData->movies', 69, 6).
+port(34, 'in', 'credits', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckCreditsData<-credits', 74, 11).
+port(35, 'out', 'credits', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckCreditsData->credits', 76, 11).
+port(36, 'in', 'credits_cast', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckCreditsCastData<-credits_cast', 81, 12).
+port(37, 'out', 'credits_cast', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckCreditsCastData->credits_cast', 83, 12).
+port(38, 'in', 'credits_crew', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckCreditsCrewData<-credits_crew', 88, 13).
+port(39, 'out', 'credits_crew', 'Overall_TMDB_MoviesDataset_Cleaning.SQLConstraintsCheckCreditsCrewData->credits_crew', 90, 13).
+
+% FACT: port_alias(port_id, alias).
+
+% FACT: port_uri_template(port_id, uri).
+port_uri_template(1, 'file://tmdb_5000_movies.csv').
+port_uri_template(2, 'file://tmdb_5000_credits.csv').
+port_uri_template(40, 'sqlite://cs513-moviesdb/tbl_movies').
+port_uri_template(41, 'sqlite://cs513-moviesdb/tbl_credits').
+port_uri_template(42, 'sqlite://cs513-moviesdb/tbl_credits_cast').
+port_uri_template(43, 'sqlite://cs513-moviesdb/tbl_credits_crew').
+port_uri_template(3, 'file://tmdb_5000_movies.csv').
+port_uri_template(4, 'file://tmdb_5000_movies-OpenRefineProcessed.csv').
+port_uri_template(5, 'file://tmdb_5000_movies-OpenRefineProcessed.csv').
+port_uri_template(6, 'file://tmdb_5000_movies-OpenRefine-Pandas-Processed.csv').
+port_uri_template(7, 'file://tmdb_5000_movies-OpenRefine-Pandas-Processed.csv').
+port_uri_template(8, 'sqlite://cs513-moviesdb/tbl_movies').
+port_uri_template(9, 'file://tmdb_5000_credits.csv').
+port_uri_template(10, 'file://tmdb_5000_credits-OpenRefineProcessed.csv').
+port_uri_template(11, 'file://tmdb_5000_credits-OpenRefineProcessed.csv').
+port_uri_template(12, 'file://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv').
+port_uri_template(13, 'file://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv').
+port_uri_template(14, 'file://tmdb_5000_credits-OpenRefineProcessed.csv').
+port_uri_template(15, 'sqlite://cs513-moviesdb/tbl_credits').
+port_uri_template(16, 'file://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv').
+port_uri_template(17, 'sqlite://cs513-moviesdb/tbl_credits_cast').
+port_uri_template(18, 'file://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv').
+port_uri_template(31, 'sqlite://cs513-moviesdb/tbl_credits_crew').
+port_uri_template(32, 'sqlite://cs513-moviesdb/tbl_movies').
+port_uri_template(33, 'sqlite://cs513-moviesdb/tbl_movies').
+port_uri_template(34, 'sqlite://cs513-moviesdb/tbl_credits').
+port_uri_template(35, 'sqlite://cs513-moviesdb/tbl_credits').
+port_uri_template(36, 'sqlite://cs513-moviesdb/tbl_credits_cast').
+port_uri_template(37, 'sqlite://cs513-moviesdb/tbl_credits_cast').
+port_uri_template(38, 'sqlite://cs513-moviesdb/tbl_credits_crew').
+port_uri_template(39, 'sqlite://cs513-moviesdb/tbl_credits_crew').
+
+% FACT: has_in_port(block_id, port_id).
+has_in_port(1, 1).
+has_in_port(1, 2).
+has_in_port(2, 3).
+has_in_port(3, 5).
+has_in_port(4, 7).
+has_in_port(5, 9).
+has_in_port(6, 11).
+has_in_port(7, 14).
+has_in_port(8, 16).
+has_in_port(9, 18).
+has_in_port(10, 32).
+has_in_port(11, 34).
+has_in_port(12, 36).
+has_in_port(13, 38).
+
+% FACT: has_out_port(block_id, port_id).
+has_out_port(1, 40).
+has_out_port(1, 41).
+has_out_port(1, 42).
+has_out_port(1, 43).
+has_out_port(2, 4).
+has_out_port(3, 6).
+has_out_port(4, 8).
+has_out_port(5, 10).
+has_out_port(6, 12).
+has_out_port(6, 13).
+has_out_port(7, 15).
+has_out_port(8, 17).
+has_out_port(9, 31).
+has_out_port(10, 33).
+has_out_port(11, 35).
+has_out_port(12, 37).
+has_out_port(13, 39).
+
+% FACT: data(data_id, data_name, qualified_data_name).
+data(1, 'tmdb_5000_movies.csv', '[tmdb_5000_movies.csv]').
+data(2, 'tmdb_5000_credits.csv', '[tmdb_5000_credits.csv]').
+data(14, 'movies', '[movies]').
+data(15, 'credits', '[credits]').
+data(16, 'credits_cast', '[credits_cast]').
+data(17, 'credits_crew', '[credits_crew]').
+data(3, 'tmdb_5000_movies.csv', 'Overall_TMDB_MoviesDataset_Cleaning[tmdb_5000_movies.csv]').
+data(4, 'tmdb_5000_movies-OpenRefineProcessed.csv', 'Overall_TMDB_MoviesDataset_Cleaning[tmdb_5000_movies-OpenRefineProcessed.csv]').
+data(5, 'tmdb_5000_movies-OpenRefine-Pandas-Processed.csv', 'Overall_TMDB_MoviesDataset_Cleaning[tmdb_5000_movies-OpenRefine-Pandas-Processed.csv]').
+data(6, 'movies', 'Overall_TMDB_MoviesDataset_Cleaning[movies]').
+data(7, 'tmdb_5000_credits.csv', 'Overall_TMDB_MoviesDataset_Cleaning[tmdb_5000_credits.csv]').
+data(8, 'tmdb_5000_credits-OpenRefineProcessed.csv', 'Overall_TMDB_MoviesDataset_Cleaning[tmdb_5000_credits-OpenRefineProcessed.csv]').
+data(9, 'tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv', 'Overall_TMDB_MoviesDataset_Cleaning[tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv]').
+data(10, 'tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv', 'Overall_TMDB_MoviesDataset_Cleaning[tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv]').
+data(11, 'credits', 'Overall_TMDB_MoviesDataset_Cleaning[credits]').
+data(12, 'credits_cast', 'Overall_TMDB_MoviesDataset_Cleaning[credits_cast]').
+data(13, 'credits_crew', 'Overall_TMDB_MoviesDataset_Cleaning[credits_crew]').
+
+% FACT: channel(channel_id, data_id).
+channel(45, 3).
+channel(46, 4).
+channel(47, 5).
+channel(48, 7).
+channel(49, 8).
+channel(50, 8).
+channel(51, 9).
+channel(52, 10).
+channel(53, 6).
+channel(54, 14).
+channel(55, 11).
+channel(56, 15).
+channel(57, 12).
+channel(58, 16).
+channel(59, 13).
+channel(60, 17).
+channel(61, 1).
+channel(62, 2).
+channel(63, 6).
+channel(64, 11).
+channel(65, 12).
+channel(66, 13).
+channel(33, 6).
+channel(34, 6).
+channel(35, 6).
+channel(36, 11).
+channel(37, 11).
+channel(38, 11).
+channel(39, 12).
+channel(40, 12).
+channel(41, 12).
+channel(42, 13).
+channel(43, 13).
+channel(44, 13).
+
+% FACT: port_connects_to_channel(port_id, channel_id).
+port_connects_to_channel(3, 45).
+port_connects_to_channel(4, 46).
+port_connects_to_channel(5, 46).
+port_connects_to_channel(6, 47).
+port_connects_to_channel(7, 47).
+port_connects_to_channel(9, 48).
+port_connects_to_channel(10, 49).
+port_connects_to_channel(11, 49).
+port_connects_to_channel(10, 50).
+port_connects_to_channel(14, 50).
+port_connects_to_channel(12, 51).
+port_connects_to_channel(16, 51).
+port_connects_to_channel(13, 52).
+port_connects_to_channel(18, 52).
+port_connects_to_channel(33, 53).
+port_connects_to_channel(32, 53).
+port_connects_to_channel(33, 54).
+port_connects_to_channel(35, 55).
+port_connects_to_channel(34, 55).
+port_connects_to_channel(35, 56).
+port_connects_to_channel(37, 57).
+port_connects_to_channel(36, 57).
+port_connects_to_channel(37, 58).
+port_connects_to_channel(39, 59).
+port_connects_to_channel(38, 59).
+port_connects_to_channel(39, 60).
+port_connects_to_channel(3, 61).
+port_connects_to_channel(9, 62).
+port_connects_to_channel(33, 63).
+port_connects_to_channel(35, 64).
+port_connects_to_channel(37, 65).
+port_connects_to_channel(39, 66).
+
+% FACT: inflow_connects_to_channel(port_id, channel_id).
+inflow_connects_to_channel(1, 45).
+inflow_connects_to_channel(2, 48).
+inflow_connects_to_channel(1, 61).
+inflow_connects_to_channel(2, 62).
+inflow_connects_to_channel(32, 33).
+inflow_connects_to_channel(32, 34).
+inflow_connects_to_channel(32, 35).
+inflow_connects_to_channel(34, 36).
+inflow_connects_to_channel(34, 37).
+inflow_connects_to_channel(34, 38).
+inflow_connects_to_channel(36, 39).
+inflow_connects_to_channel(36, 40).
+inflow_connects_to_channel(36, 41).
+inflow_connects_to_channel(38, 42).
+inflow_connects_to_channel(38, 43).
+inflow_connects_to_channel(38, 44).
+
+% FACT: outflow_connects_to_channel(port_id, channel_id).
+outflow_connects_to_channel(40, 54).
+outflow_connects_to_channel(41, 56).
+outflow_connects_to_channel(42, 58).
+outflow_connects_to_channel(43, 60).
+outflow_connects_to_channel(40, 63).
+outflow_connects_to_channel(41, 64).
+outflow_connects_to_channel(42, 65).
+outflow_connects_to_channel(43, 66).
+outflow_connects_to_channel(33, 33).
+outflow_connects_to_channel(33, 34).
+outflow_connects_to_channel(33, 35).
+outflow_connects_to_channel(35, 36).
+outflow_connects_to_channel(35, 37).
+outflow_connects_to_channel(35, 38).
+outflow_connects_to_channel(37, 39).
+outflow_connects_to_channel(37, 40).
+outflow_connects_to_channel(37, 41).
+outflow_connects_to_channel(39, 42).
+outflow_connects_to_channel(39, 43).
+outflow_connects_to_channel(39, 44).
+
+% FACT: uri_variable(uri_variable_id, variable_name, port_id).
+
+% FACT: log_template(log_template_id, port_id, entry_template, log_annotation_id).
+
+% FACT: log_template_variable(log_variable_id, variable_name, log_template_id).
+
+% FACT: extract_source(source_id, source_path).
+extract_source(1, '').
+
+% FACT: annotation(annotation_id, source_id, line_number, tag, keyword, value).
+annotation(1, 1, 2, 'begin', '@begin', 'Overall_TMDB_MoviesDataset_Cleaning').
+annotation(2, 1, 2, 'desc', '@desc', 'Overall Workflow for cleaning the TMDB dataset').
+annotation(3, 1, 3, 'in', '@in', 'tmdb_5000_movies.csv').
+annotation(4, 1, 3, 'uri', '@uri', 'file://tmdb_5000_movies.csv').
+annotation(5, 1, 4, 'in', '@in', 'tmdb_5000_credits.csv').
+annotation(6, 1, 4, 'uri', '@uri', 'file://tmdb_5000_credits.csv').
+annotation(7, 1, 7, 'begin', '@begin', 'CleaningMoviesDataUsingOpenRefine').
+annotation(8, 1, 7, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_movies.csv').
+annotation(9, 1, 8, 'in', '@in', 'tmdb_5000_movies.csv').
+annotation(10, 1, 8, 'uri', '@uri', 'file://tmdb_5000_movies.csv').
+annotation(11, 1, 9, 'out', '@out', 'tmdb_5000_movies-OpenRefineProcessed.csv').
+annotation(12, 1, 9, 'uri', '@uri', 'file://tmdb_5000_movies-OpenRefineProcessed.csv').
+annotation(13, 1, 10, 'end', '@end', 'CleaningMoviesDataUsingOpenRefine').
+annotation(14, 1, 12, 'begin', '@begin', 'CleaningMoviesDataUsingPandas').
+annotation(15, 1, 12, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_movies.csv').
+annotation(16, 1, 13, 'in', '@in', 'tmdb_5000_movies-OpenRefineProcessed.csv').
+annotation(17, 1, 13, 'uri', '@uri', 'file://tmdb_5000_movies-OpenRefineProcessed.csv').
+annotation(18, 1, 14, 'out', '@out', 'tmdb_5000_movies-OpenRefine-Pandas-Processed.csv').
+annotation(19, 1, 14, 'uri', '@uri', 'file://tmdb_5000_movies-OpenRefine-Pandas-Processed.csv').
+annotation(20, 1, 15, 'end', '@end', 'CleaningMoviesDataUsingPandas').
+annotation(21, 1, 17, 'begin', '@begin', 'CreateSQLiteMoviesTable').
+annotation(22, 1, 17, 'desc', '@desc', 'Define schema(without constraints) and load movies-data').
+annotation(23, 1, 18, 'in', '@in', 'tmdb_5000_movies-OpenRefine-Pandas-Processed.csv').
+annotation(24, 1, 18, 'uri', '@uri', 'file://tmdb_5000_movies-OpenRefine-Pandas-Processed.csv').
+annotation(25, 1, 19, 'out', '@out', 'movies').
+annotation(26, 1, 19, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_movies').
+annotation(27, 1, 20, 'end', '@end', 'CreateSQLiteMoviesTable').
+annotation(28, 1, 23, 'begin', '@begin', 'CleaningCreditsDataUsingOpenRefine').
+annotation(29, 1, 23, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_credits.csv').
+annotation(30, 1, 24, 'in', '@in', 'tmdb_5000_credits.csv').
+annotation(31, 1, 24, 'uri', '@uri', 'file://tmdb_5000_credits.csv').
+annotation(32, 1, 25, 'out', '@out', 'tmdb_5000_credits-OpenRefineProcessed.csv').
+annotation(33, 1, 25, 'uri', '@uri', 'file://tmdb_5000_credits-OpenRefineProcessed.csv').
+annotation(34, 1, 26, 'end', '@end', 'CleaningCreditsDataUsingOpenRefine').
+annotation(35, 1, 28, 'begin', '@begin', 'CleaningCreditsDataUsingPandas').
+annotation(36, 1, 28, 'desc', '@desc', 'Use Pandas to create two new tables from the JSON data of 'Cast' and 'Crew' columns').
+annotation(37, 1, 29, 'in', '@in', 'tmdb_5000_credits-OpenRefineProcessed.csv').
+annotation(38, 1, 29, 'uri', '@uri', 'file://tmdb_5000_credits-OpenRefineProcessed.csv').
+annotation(39, 1, 30, 'out', '@out', 'tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv').
+annotation(40, 1, 30, 'uri', '@uri', 'file://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv').
+annotation(41, 1, 31, 'out', '@out', 'tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv').
+annotation(42, 1, 31, 'uri', '@uri', 'file://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv').
+annotation(43, 1, 32, 'end', '@end', 'CleaningCreditsDataUsingPandas').
+annotation(44, 1, 34, 'begin', '@begin', 'CreateSQLiteCreditsTable').
+annotation(45, 1, 34, 'desc', '@desc', 'Define schema(without constraints) and load credits data').
+annotation(46, 1, 35, 'in', '@in', 'tmdb_5000_credits-OpenRefineProcessed.csv').
+annotation(47, 1, 35, 'uri', '@uri', 'file://tmdb_5000_credits-OpenRefineProcessed.csv').
+annotation(48, 1, 36, 'out', '@out', 'credits').
+annotation(49, 1, 36, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits').
+annotation(50, 1, 37, 'end', '@end', 'CreateSQLiteCreditsTable').
+annotation(51, 1, 39, 'begin', '@begin', 'CreateSQLiteCreditsCastTable').
+annotation(52, 1, 39, 'desc', '@desc', 'Define schema(without constraints) and load credits-cast data').
+annotation(53, 1, 40, 'in', '@in', 'tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv').
+annotation(54, 1, 40, 'uri', '@uri', 'file://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv').
+annotation(55, 1, 41, 'out', '@out', 'credits_cast').
+annotation(56, 1, 41, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits_cast').
+annotation(57, 1, 42, 'end', '@end', 'CreateSQLiteCreditsCastTable').
+annotation(58, 1, 44, 'begin', '@begin', 'CreateSQLiteCreditsCrewTable').
+annotation(59, 1, 44, 'desc', '@desc', 'Define schema(without constraints) and load crdits-crew data').
+annotation(60, 1, 45, 'in', '@in', 'tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv').
+annotation(61, 1, 45, 'uri', '@uri', 'file://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv').
+annotation(62, 1, 46, 'out', '@out', 'credits_crew').
+annotation(63, 1, 46, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits_crew').
+annotation(64, 1, 47, 'end', '@end', 'CreateSQLiteCreditsCrewTable').
+annotation(65, 1, 50, 'begin', '@begin', 'SQLConstraintsCheckMoviesData').
+annotation(66, 1, 50, 'desc', '@desc', 'Check SQL data/referential integrity constraints- Movies').
+annotation(67, 1, 51, 'in', '@in', 'movies').
+annotation(68, 1, 51, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_movies').
+annotation(69, 1, 52, 'out', '@out', 'movies').
+annotation(70, 1, 52, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_movies').
+annotation(71, 1, 53, 'end', '@end', 'SQLConstraintsCheckMoviesData').
+annotation(72, 1, 55, 'begin', '@begin', 'SQLConstraintsCheckCreditsData').
+annotation(73, 1, 55, 'desc', '@desc', 'Check SQL data/referential integrity constraints - Credits').
+annotation(74, 1, 56, 'in', '@in', 'credits').
+annotation(75, 1, 56, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits').
+annotation(76, 1, 57, 'out', '@out', 'credits').
+annotation(77, 1, 57, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits').
+annotation(78, 1, 58, 'end', '@end', 'SQLConstraintsCheckCreditsData').
+annotation(79, 1, 60, 'begin', '@begin', 'SQLConstraintsCheckCreditsCastData').
+annotation(80, 1, 60, 'desc', '@desc', 'Check SQL data/referential integrity constraints - Credits').
+annotation(81, 1, 61, 'in', '@in', 'credits_cast').
+annotation(82, 1, 61, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits_cast').
+annotation(83, 1, 62, 'out', '@out', 'credits_cast').
+annotation(84, 1, 62, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits_cast').
+annotation(85, 1, 63, 'end', '@end', 'SQLConstraintsCheckCreditsCastData').
+annotation(86, 1, 65, 'begin', '@begin', 'SQLConstraintsCheckCreditsCrewData').
+annotation(87, 1, 65, 'desc', '@desc', 'Check SQL data/referential integrity constraints - Credits').
+annotation(88, 1, 66, 'in', '@in', 'credits_crew').
+annotation(89, 1, 66, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits_crew').
+annotation(90, 1, 67, 'out', '@out', 'credits_crew').
+annotation(91, 1, 67, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits_crew').
+annotation(92, 1, 68, 'end', '@end', 'SQLConstraintsCheckCreditsCrewData').
+annotation(93, 1, 70, 'out', '@out', 'movies').
+annotation(94, 1, 70, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_movies').
+annotation(95, 1, 71, 'out', '@out', 'credits').
+annotation(96, 1, 71, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits').
+annotation(97, 1, 72, 'out', '@out', 'credits_cast').
+annotation(98, 1, 72, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits_cast').
+annotation(99, 1, 73, 'out', '@out', 'credits_crew').
+annotation(100, 1, 73, 'uri', '@uri', 'sqlite://cs513-moviesdb/tbl_credits_crew').
+annotation(101, 1, 75, 'end', '@end', 'Overall_TMDB_MoviesDataset_Cleaning').
+
+% FACT: annotation_qualifies(qualifying_annotation_id, primary_annotation_id).
+annotation_qualifies(2, 1).
+annotation_qualifies(4, 3).
+annotation_qualifies(6, 5).
+annotation_qualifies(8, 7).
+annotation_qualifies(10, 9).
+annotation_qualifies(12, 11).
+annotation_qualifies(15, 14).
+annotation_qualifies(17, 16).
+annotation_qualifies(19, 18).
+annotation_qualifies(22, 21).
+annotation_qualifies(24, 23).
+annotation_qualifies(26, 25).
+annotation_qualifies(29, 28).
+annotation_qualifies(31, 30).
+annotation_qualifies(33, 32).
+annotation_qualifies(36, 35).
+annotation_qualifies(38, 37).
+annotation_qualifies(40, 39).
+annotation_qualifies(42, 41).
+annotation_qualifies(45, 44).
+annotation_qualifies(47, 46).
+annotation_qualifies(49, 48).
+annotation_qualifies(52, 51).
+annotation_qualifies(54, 53).
+annotation_qualifies(56, 55).
+annotation_qualifies(59, 58).
+annotation_qualifies(61, 60).
+annotation_qualifies(63, 62).
+annotation_qualifies(66, 65).
+annotation_qualifies(68, 67).
+annotation_qualifies(70, 69).
+annotation_qualifies(73, 72).
+annotation_qualifies(75, 74).
+annotation_qualifies(77, 76).
+annotation_qualifies(80, 79).
+annotation_qualifies(82, 81).
+annotation_qualifies(84, 83).
+annotation_qualifies(87, 86).
+annotation_qualifies(89, 88).
+annotation_qualifies(91, 90).
+annotation_qualifies(94, 93).
+annotation_qualifies(96, 95).
+annotation_qualifies(98, 97).
+annotation_qualifies(100, 99).

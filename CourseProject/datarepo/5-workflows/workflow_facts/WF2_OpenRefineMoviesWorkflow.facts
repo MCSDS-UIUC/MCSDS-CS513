@@ -1,0 +1,533 @@
+
+% FACT: program(program_id, program_name, qualified_program_name, begin_annotation_id, end_annotation_id).
+program(1, 'TMDB_Movies_Datacleaning_Using_OpenRefine', 'TMDB_Movies_Datacleaning_Using_OpenRefine', 1, 108).
+program(2, 'LoadDataUsingOpenRefine', 'TMDB_Movies_Datacleaning_Using_OpenRefine.LoadDataUsingOpenRefine', 5, 10).
+program(3, 'IdentifyColumnsToCleanUsingOpenRefine', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine', 11, 27).
+program(4, 'ColTextTransform_RemoveSpecialChars', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RemoveSpecialChars', 28, 36).
+program(5, 'ColTextTransform_TrimSpaces', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_TrimSpaces', 37, 41).
+program(6, 'ColTextTransform_TrimSpaces', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_TrimSpaces', 42, 45).
+program(7, 'CreateCloneOfExistingColumn', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn', 46, 59).
+program(8, 'CreateBinaryEncodedColumnsForEachGenre', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateBinaryEncodedColumnsForEachGenre', 60, 68).
+program(9, 'ColumnTextTransformation_DomainExtraction', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColumnTextTransformation_DomainExtraction', 69, 73).
+program(10, 'ColTextTransform_ToLowerCase', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_ToLowerCase', 74, 78).
+program(11, 'ColTextTransform_JSONtoSemicolonSepList', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_JSONtoSemicolonSepList', 79, 87).
+program(12, 'ColTextTransform_RoundNumberUpto2Decimals', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RoundNumberUpto2Decimals', 88, 92).
+program(13, 'ColTextTransform_DateFormatChange', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_DateFormatChange', 93, 97).
+program(14, 'ColTextTransform_ToNumber', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_ToNumber', 98, 102).
+program(15, 'ColTextTransform_Clustering', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_Clustering', 103, 107).
+
+% FACT: workflow(program_id).
+workflow(1).
+workflow(4).
+workflow(5).
+workflow(9).
+workflow(10).
+workflow(11).
+workflow(12).
+workflow(13).
+workflow(14).
+workflow(15).
+
+% FACT: function(program_id).
+
+% FACT: has_subprogram(program_id, subprogram_id).
+has_subprogram(1, 2).
+has_subprogram(1, 3).
+has_subprogram(1, 4).
+has_subprogram(1, 5).
+has_subprogram(1, 6).
+has_subprogram(1, 7).
+has_subprogram(1, 8).
+has_subprogram(1, 9).
+has_subprogram(1, 10).
+has_subprogram(1, 11).
+has_subprogram(1, 12).
+has_subprogram(1, 13).
+has_subprogram(1, 14).
+has_subprogram(1, 15).
+
+% FACT: port(port_id, port_type, port_name, qualified_port_name, port_annotation_id, data_id).
+port(1, 'in', 'tmdb_5000_movies.csv', 'TMDB_Movies_Datacleaning_Using_OpenRefine<-tmdb_5000_movies.csv', 3, 1).
+port(2, 'in', 'tmdb_5000_movies.csv', 'TMDB_Movies_Datacleaning_Using_OpenRefine.LoadDataUsingOpenRefine<-tmdb_5000_movies.csv', 7, 2).
+port(3, 'out', 'movies_data_in_openrefine_workspace', 'TMDB_Movies_Datacleaning_Using_OpenRefine.LoadDataUsingOpenRefine->movies_data_in_openrefine_workspace', 9, 3).
+port(4, 'in', 'movies_data_in_openrefine_workspace', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine<-movies_data_in_openrefine_workspace', 13, 3).
+port(5, 'out', 'genres', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->genres', 14, 4).
+port(6, 'out', 'homepage', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->homepage', 15, 5).
+port(7, 'out', 'keywords', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->keywords', 16, 6).
+port(8, 'out', 'original_title', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->original_title', 17, 7).
+port(9, 'out', 'overview', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->overview', 18, 8).
+port(10, 'out', 'popularity', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->popularity', 19, 9).
+port(11, 'out', 'production_companies', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->production_companies', 20, 10).
+port(12, 'out', 'production_countries', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->production_countries', 21, 11).
+port(13, 'out', 'release_date', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->release_date', 22, 12).
+port(14, 'out', 'revenue', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->revenue', 23, 13).
+port(15, 'out', 'spoken_languages', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->spoken_languages', 24, 14).
+port(16, 'out', 'tagline', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->tagline', 25, 15).
+port(17, 'out', 'title', 'TMDB_Movies_Datacleaning_Using_OpenRefine.IdentifyColumnsToCleanUsingOpenRefine->title', 26, 16).
+port(18, 'in', 'original_title', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RemoveSpecialChars<-original_title', 30, 7).
+port(19, 'in', 'title', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RemoveSpecialChars<-title', 31, 16).
+port(20, 'in', 'overview', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RemoveSpecialChars<-overview', 32, 8).
+port(21, 'out', 'original_title', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RemoveSpecialChars->original_title', 33, 7).
+port(22, 'out', 'title', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RemoveSpecialChars->title', 34, 16).
+port(23, 'out', 'overview', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RemoveSpecialChars->overview', 35, 8).
+port(24, 'in', 'overview', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_TrimSpaces<-overview', 39, 8).
+port(25, 'out', 'overview', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_TrimSpaces->overview', 40, 8).
+port(26, 'in', 'overview', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_TrimSpaces<-overview', 44, 8).
+port(27, 'in', 'homepage', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn<-homepage', 48, 5).
+port(28, 'in', 'genres', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn<-genres', 49, 4).
+port(29, 'in', 'production_companies', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn<-production_companies', 50, 10).
+port(30, 'in', 'spoken_languages', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn<-spoken_languages', 51, 14).
+port(31, 'in', 'production_countries', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn<-production_countries', 52, 11).
+port(32, 'out', 'homepage_domain', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn->homepage_domain', 53, 17).
+port(33, 'out', 'genres_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn->genres_list', 54, 18).
+port(34, 'out', 'genres_id_name_pair', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn->genres_id_name_pair', 55, 19).
+port(35, 'out', 'production_companies_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn->production_companies_list', 56, 20).
+port(36, 'out', 'spoken_languages_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn->spoken_languages_list', 57, 21).
+port(37, 'out', 'production_countries_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateCloneOfExistingColumn->production_countries_list', 58, 22).
+port(38, 'in', 'genres', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateBinaryEncodedColumnsForEachGenre<-genres', 62, 4).
+port(39, 'out', 'genre_type_action', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateBinaryEncodedColumnsForEachGenre->genre_type_action', 63, 23).
+port(40, 'out', 'genre_type_adventure', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateBinaryEncodedColumnsForEachGenre->genre_type_adventure', 64, 24).
+port(41, 'out', '...', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateBinaryEncodedColumnsForEachGenre->...', 65, 25).
+port(42, 'out', 'genre_type_war', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateBinaryEncodedColumnsForEachGenre->genre_type_war', 66, 26).
+port(43, 'out', 'genre_type_western', 'TMDB_Movies_Datacleaning_Using_OpenRefine.CreateBinaryEncodedColumnsForEachGenre->genre_type_western', 67, 27).
+port(44, 'in', 'homepage_domain', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColumnTextTransformation_DomainExtraction<-homepage_domain', 71, 17).
+port(45, 'out', 'homepage_domain', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColumnTextTransformation_DomainExtraction->homepage_domain', 72, 17).
+port(46, 'in', 'keywords', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_ToLowerCase<-keywords', 76, 6).
+port(47, 'out', 'keywords', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_ToLowerCase->keywords', 77, 6).
+port(48, 'in', 'keywords', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_JSONtoSemicolonSepList<-keywords', 81, 6).
+port(49, 'in', 'production_companies_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_JSONtoSemicolonSepList<-production_companies_list', 82, 20).
+port(50, 'in', 'production_countries', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_JSONtoSemicolonSepList<-production_countries', 83, 11).
+port(51, 'out', 'keywords', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_JSONtoSemicolonSepList->keywords', 84, 6).
+port(52, 'out', 'production_companies_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_JSONtoSemicolonSepList->production_companies_list', 85, 20).
+port(53, 'out', 'production_countries_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_JSONtoSemicolonSepList->production_countries_list', 86, 22).
+port(54, 'in', 'popularity', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RoundNumberUpto2Decimals<-popularity', 90, 9).
+port(55, 'out', 'popularity', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_RoundNumberUpto2Decimals->popularity', 91, 9).
+port(56, 'in', 'release_date', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_DateFormatChange<-release_date', 95, 12).
+port(57, 'out', 'release_date', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_DateFormatChange->release_date', 96, 12).
+port(58, 'in', 'revenue', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_ToNumber<-revenue', 100, 13).
+port(59, 'out', 'revenue', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_ToNumber->revenue', 101, 13).
+port(60, 'in', 'tagline', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_Clustering<-tagline', 105, 15).
+port(61, 'out', 'tagline', 'TMDB_Movies_Datacleaning_Using_OpenRefine.ColTextTransform_Clustering->tagline', 106, 15).
+
+% FACT: port_alias(port_id, alias).
+
+% FACT: port_uri_template(port_id, uri).
+port_uri_template(1, 'file://tmdb_5000_movies.csv').
+port_uri_template(2, 'file://tmdb_5000_movies.csv').
+
+% FACT: has_in_port(block_id, port_id).
+has_in_port(1, 1).
+has_in_port(2, 2).
+has_in_port(3, 4).
+has_in_port(4, 18).
+has_in_port(4, 19).
+has_in_port(4, 20).
+has_in_port(5, 24).
+has_in_port(6, 26).
+has_in_port(7, 27).
+has_in_port(7, 28).
+has_in_port(7, 29).
+has_in_port(7, 30).
+has_in_port(7, 31).
+has_in_port(8, 38).
+has_in_port(9, 44).
+has_in_port(10, 46).
+has_in_port(11, 48).
+has_in_port(11, 49).
+has_in_port(11, 50).
+has_in_port(12, 54).
+has_in_port(13, 56).
+has_in_port(14, 58).
+has_in_port(15, 60).
+
+% FACT: has_out_port(block_id, port_id).
+has_out_port(2, 3).
+has_out_port(3, 5).
+has_out_port(3, 6).
+has_out_port(3, 7).
+has_out_port(3, 8).
+has_out_port(3, 9).
+has_out_port(3, 10).
+has_out_port(3, 11).
+has_out_port(3, 12).
+has_out_port(3, 13).
+has_out_port(3, 14).
+has_out_port(3, 15).
+has_out_port(3, 16).
+has_out_port(3, 17).
+has_out_port(4, 21).
+has_out_port(4, 22).
+has_out_port(4, 23).
+has_out_port(5, 25).
+has_out_port(7, 32).
+has_out_port(7, 33).
+has_out_port(7, 34).
+has_out_port(7, 35).
+has_out_port(7, 36).
+has_out_port(7, 37).
+has_out_port(8, 39).
+has_out_port(8, 40).
+has_out_port(8, 41).
+has_out_port(8, 42).
+has_out_port(8, 43).
+has_out_port(9, 45).
+has_out_port(10, 47).
+has_out_port(11, 51).
+has_out_port(11, 52).
+has_out_port(11, 53).
+has_out_port(12, 55).
+has_out_port(13, 57).
+has_out_port(14, 59).
+has_out_port(15, 61).
+
+% FACT: data(data_id, data_name, qualified_data_name).
+data(1, 'tmdb_5000_movies.csv', '[tmdb_5000_movies.csv]').
+data(2, 'tmdb_5000_movies.csv', 'TMDB_Movies_Datacleaning_Using_OpenRefine[tmdb_5000_movies.csv]').
+data(3, 'movies_data_in_openrefine_workspace', 'TMDB_Movies_Datacleaning_Using_OpenRefine[movies_data_in_openrefine_workspace]').
+data(4, 'genres', 'TMDB_Movies_Datacleaning_Using_OpenRefine[genres]').
+data(5, 'homepage', 'TMDB_Movies_Datacleaning_Using_OpenRefine[homepage]').
+data(6, 'keywords', 'TMDB_Movies_Datacleaning_Using_OpenRefine[keywords]').
+data(7, 'original_title', 'TMDB_Movies_Datacleaning_Using_OpenRefine[original_title]').
+data(8, 'overview', 'TMDB_Movies_Datacleaning_Using_OpenRefine[overview]').
+data(9, 'popularity', 'TMDB_Movies_Datacleaning_Using_OpenRefine[popularity]').
+data(10, 'production_companies', 'TMDB_Movies_Datacleaning_Using_OpenRefine[production_companies]').
+data(11, 'production_countries', 'TMDB_Movies_Datacleaning_Using_OpenRefine[production_countries]').
+data(12, 'release_date', 'TMDB_Movies_Datacleaning_Using_OpenRefine[release_date]').
+data(13, 'revenue', 'TMDB_Movies_Datacleaning_Using_OpenRefine[revenue]').
+data(14, 'spoken_languages', 'TMDB_Movies_Datacleaning_Using_OpenRefine[spoken_languages]').
+data(15, 'tagline', 'TMDB_Movies_Datacleaning_Using_OpenRefine[tagline]').
+data(16, 'title', 'TMDB_Movies_Datacleaning_Using_OpenRefine[title]').
+data(17, 'homepage_domain', 'TMDB_Movies_Datacleaning_Using_OpenRefine[homepage_domain]').
+data(18, 'genres_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine[genres_list]').
+data(19, 'genres_id_name_pair', 'TMDB_Movies_Datacleaning_Using_OpenRefine[genres_id_name_pair]').
+data(20, 'production_companies_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine[production_companies_list]').
+data(21, 'spoken_languages_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine[spoken_languages_list]').
+data(22, 'production_countries_list', 'TMDB_Movies_Datacleaning_Using_OpenRefine[production_countries_list]').
+data(23, 'genre_type_action', 'TMDB_Movies_Datacleaning_Using_OpenRefine[genre_type_action]').
+data(24, 'genre_type_adventure', 'TMDB_Movies_Datacleaning_Using_OpenRefine[genre_type_adventure]').
+data(25, '...', 'TMDB_Movies_Datacleaning_Using_OpenRefine[...]').
+data(26, 'genre_type_war', 'TMDB_Movies_Datacleaning_Using_OpenRefine[genre_type_war]').
+data(27, 'genre_type_western', 'TMDB_Movies_Datacleaning_Using_OpenRefine[genre_type_western]').
+
+% FACT: channel(channel_id, data_id).
+channel(37, 2).
+channel(38, 3).
+channel(39, 7).
+channel(40, 16).
+channel(41, 8).
+channel(42, 8).
+channel(43, 8).
+channel(44, 5).
+channel(45, 4).
+channel(46, 4).
+channel(47, 10).
+channel(48, 14).
+channel(49, 11).
+channel(50, 11).
+channel(51, 17).
+channel(52, 6).
+channel(53, 6).
+channel(54, 20).
+channel(55, 9).
+channel(56, 12).
+channel(57, 13).
+channel(58, 15).
+channel(59, 1).
+channel(1, 7).
+channel(2, 16).
+channel(3, 8).
+channel(4, 7).
+channel(5, 16).
+channel(6, 8).
+channel(7, 7).
+channel(8, 16).
+channel(9, 8).
+channel(10, 8).
+channel(11, 8).
+channel(12, 8).
+channel(13, 17).
+channel(14, 17).
+channel(15, 17).
+channel(16, 6).
+channel(17, 6).
+channel(18, 6).
+channel(19, 6).
+channel(20, 20).
+channel(21, 6).
+channel(22, 20).
+channel(23, 6).
+channel(24, 20).
+channel(25, 9).
+channel(26, 9).
+channel(27, 9).
+channel(28, 12).
+channel(29, 12).
+channel(30, 12).
+channel(31, 13).
+channel(32, 13).
+channel(33, 13).
+channel(34, 15).
+channel(35, 15).
+channel(36, 15).
+
+% FACT: port_connects_to_channel(port_id, channel_id).
+port_connects_to_channel(2, 37).
+port_connects_to_channel(3, 38).
+port_connects_to_channel(4, 38).
+port_connects_to_channel(21, 39).
+port_connects_to_channel(18, 39).
+port_connects_to_channel(22, 40).
+port_connects_to_channel(19, 40).
+port_connects_to_channel(25, 41).
+port_connects_to_channel(20, 41).
+port_connects_to_channel(25, 42).
+port_connects_to_channel(24, 42).
+port_connects_to_channel(25, 43).
+port_connects_to_channel(26, 43).
+port_connects_to_channel(6, 44).
+port_connects_to_channel(27, 44).
+port_connects_to_channel(5, 45).
+port_connects_to_channel(28, 45).
+port_connects_to_channel(5, 46).
+port_connects_to_channel(38, 46).
+port_connects_to_channel(11, 47).
+port_connects_to_channel(29, 47).
+port_connects_to_channel(15, 48).
+port_connects_to_channel(30, 48).
+port_connects_to_channel(12, 49).
+port_connects_to_channel(31, 49).
+port_connects_to_channel(12, 50).
+port_connects_to_channel(50, 50).
+port_connects_to_channel(45, 51).
+port_connects_to_channel(44, 51).
+port_connects_to_channel(51, 52).
+port_connects_to_channel(46, 52).
+port_connects_to_channel(51, 53).
+port_connects_to_channel(48, 53).
+port_connects_to_channel(52, 54).
+port_connects_to_channel(49, 54).
+port_connects_to_channel(55, 55).
+port_connects_to_channel(54, 55).
+port_connects_to_channel(57, 56).
+port_connects_to_channel(56, 56).
+port_connects_to_channel(59, 57).
+port_connects_to_channel(58, 57).
+port_connects_to_channel(61, 58).
+port_connects_to_channel(60, 58).
+port_connects_to_channel(2, 59).
+
+% FACT: inflow_connects_to_channel(port_id, channel_id).
+inflow_connects_to_channel(1, 37).
+inflow_connects_to_channel(1, 59).
+inflow_connects_to_channel(18, 1).
+inflow_connects_to_channel(19, 2).
+inflow_connects_to_channel(20, 3).
+inflow_connects_to_channel(18, 4).
+inflow_connects_to_channel(19, 5).
+inflow_connects_to_channel(20, 6).
+inflow_connects_to_channel(18, 7).
+inflow_connects_to_channel(19, 8).
+inflow_connects_to_channel(20, 9).
+inflow_connects_to_channel(24, 10).
+inflow_connects_to_channel(24, 11).
+inflow_connects_to_channel(24, 12).
+inflow_connects_to_channel(44, 13).
+inflow_connects_to_channel(44, 14).
+inflow_connects_to_channel(44, 15).
+inflow_connects_to_channel(46, 16).
+inflow_connects_to_channel(46, 17).
+inflow_connects_to_channel(46, 18).
+inflow_connects_to_channel(48, 19).
+inflow_connects_to_channel(49, 20).
+inflow_connects_to_channel(48, 21).
+inflow_connects_to_channel(49, 22).
+inflow_connects_to_channel(48, 23).
+inflow_connects_to_channel(49, 24).
+inflow_connects_to_channel(54, 25).
+inflow_connects_to_channel(54, 26).
+inflow_connects_to_channel(54, 27).
+inflow_connects_to_channel(56, 28).
+inflow_connects_to_channel(56, 29).
+inflow_connects_to_channel(56, 30).
+inflow_connects_to_channel(58, 31).
+inflow_connects_to_channel(58, 32).
+inflow_connects_to_channel(58, 33).
+inflow_connects_to_channel(60, 34).
+inflow_connects_to_channel(60, 35).
+inflow_connects_to_channel(60, 36).
+
+% FACT: outflow_connects_to_channel(port_id, channel_id).
+outflow_connects_to_channel(21, 1).
+outflow_connects_to_channel(22, 2).
+outflow_connects_to_channel(23, 3).
+outflow_connects_to_channel(21, 4).
+outflow_connects_to_channel(22, 5).
+outflow_connects_to_channel(23, 6).
+outflow_connects_to_channel(21, 7).
+outflow_connects_to_channel(22, 8).
+outflow_connects_to_channel(23, 9).
+outflow_connects_to_channel(25, 10).
+outflow_connects_to_channel(25, 11).
+outflow_connects_to_channel(25, 12).
+outflow_connects_to_channel(45, 13).
+outflow_connects_to_channel(45, 14).
+outflow_connects_to_channel(45, 15).
+outflow_connects_to_channel(47, 16).
+outflow_connects_to_channel(47, 17).
+outflow_connects_to_channel(47, 18).
+outflow_connects_to_channel(51, 19).
+outflow_connects_to_channel(52, 20).
+outflow_connects_to_channel(51, 21).
+outflow_connects_to_channel(52, 22).
+outflow_connects_to_channel(51, 23).
+outflow_connects_to_channel(52, 24).
+outflow_connects_to_channel(55, 25).
+outflow_connects_to_channel(55, 26).
+outflow_connects_to_channel(55, 27).
+outflow_connects_to_channel(57, 28).
+outflow_connects_to_channel(57, 29).
+outflow_connects_to_channel(57, 30).
+outflow_connects_to_channel(59, 31).
+outflow_connects_to_channel(59, 32).
+outflow_connects_to_channel(59, 33).
+outflow_connects_to_channel(61, 34).
+outflow_connects_to_channel(61, 35).
+outflow_connects_to_channel(61, 36).
+
+% FACT: uri_variable(uri_variable_id, variable_name, port_id).
+
+% FACT: log_template(log_template_id, port_id, entry_template, log_annotation_id).
+
+% FACT: log_template_variable(log_variable_id, variable_name, log_template_id).
+
+% FACT: extract_source(source_id, source_path).
+extract_source(1, '').
+
+% FACT: annotation(annotation_id, source_id, line_number, tag, keyword, value).
+annotation(1, 1, 2, 'begin', '@begin', 'TMDB_Movies_Datacleaning_Using_OpenRefine').
+annotation(2, 1, 2, 'desc', '@desc', 'Cleaning movies dataset using OpenRefine tool').
+annotation(3, 1, 3, 'in', '@in', 'tmdb_5000_movies.csv').
+annotation(4, 1, 3, 'uri', '@uri', 'file://tmdb_5000_movies.csv').
+annotation(5, 1, 6, 'begin', '@begin', 'LoadDataUsingOpenRefine').
+annotation(6, 1, 6, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_movies.csv').
+annotation(7, 1, 7, 'in', '@in', 'tmdb_5000_movies.csv').
+annotation(8, 1, 7, 'uri', '@uri', 'file://tmdb_5000_movies.csv').
+annotation(9, 1, 8, 'out', '@out', 'movies_data_in_openrefine_workspace').
+annotation(10, 1, 9, 'end', '@end', 'LoadDataUsingOpenRefine').
+annotation(11, 1, 11, 'begin', '@begin', 'IdentifyColumnsToCleanUsingOpenRefine').
+annotation(12, 1, 11, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_movies.csv').
+annotation(13, 1, 12, 'in', '@in', 'movies_data_in_openrefine_workspace').
+annotation(14, 1, 13, 'out', '@out', 'genres').
+annotation(15, 1, 14, 'out', '@out', 'homepage').
+annotation(16, 1, 15, 'out', '@out', 'keywords').
+annotation(17, 1, 16, 'out', '@out', 'original_title').
+annotation(18, 1, 17, 'out', '@out', 'overview').
+annotation(19, 1, 18, 'out', '@out', 'popularity').
+annotation(20, 1, 19, 'out', '@out', 'production_companies').
+annotation(21, 1, 20, 'out', '@out', 'production_countries').
+annotation(22, 1, 21, 'out', '@out', 'release_date').
+annotation(23, 1, 22, 'out', '@out', 'revenue').
+annotation(24, 1, 23, 'out', '@out', 'spoken_languages').
+annotation(25, 1, 24, 'out', '@out', 'tagline').
+annotation(26, 1, 25, 'out', '@out', 'title').
+annotation(27, 1, 26, 'end', '@end', 'IdentifyColumnsToCleanUsingOpenRefine').
+annotation(28, 1, 28, 'begin', '@begin', 'ColTextTransform_RemoveSpecialChars').
+annotation(29, 1, 28, 'desc', '@desc', 'Remove chars like - %,,@,/,#,!,[,],(,),\?').
+annotation(30, 1, 29, 'in', '@in', 'original_title').
+annotation(31, 1, 30, 'in', '@in', 'title').
+annotation(32, 1, 31, 'in', '@in', 'overview').
+annotation(33, 1, 32, 'out', '@out', 'original_title').
+annotation(34, 1, 33, 'out', '@out', 'title').
+annotation(35, 1, 34, 'out', '@out', 'overview').
+annotation(36, 1, 35, 'end', '@end', 'ColTextTransform_RemoveSpecialChars').
+annotation(37, 1, 37, 'begin', '@begin', 'ColTextTransform_TrimSpaces').
+annotation(38, 1, 37, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_movies.csv').
+annotation(39, 1, 38, 'in', '@in', 'overview').
+annotation(40, 1, 39, 'out', '@out', 'overview').
+annotation(41, 1, 40, 'end', '@end', 'ColTextTransform_TrimSpaces').
+annotation(42, 1, 42, 'begin', '@begin', 'ColTextTransform_TrimSpaces').
+annotation(43, 1, 42, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_movies.csv').
+annotation(44, 1, 43, 'in', '@in', 'overview').
+annotation(45, 1, 44, 'end', '@end', 'ColTextTransform_TrimSpaces').
+annotation(46, 1, 46, 'begin', '@begin', 'CreateCloneOfExistingColumn').
+annotation(47, 1, 46, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_movies.csv').
+annotation(48, 1, 47, 'in', '@in', 'homepage').
+annotation(49, 1, 48, 'in', '@in', 'genres').
+annotation(50, 1, 49, 'in', '@in', 'production_companies').
+annotation(51, 1, 50, 'in', '@in', 'spoken_languages').
+annotation(52, 1, 51, 'in', '@in', 'production_countries').
+annotation(53, 1, 52, 'out', '@out', 'homepage_domain').
+annotation(54, 1, 53, 'out', '@out', 'genres_list').
+annotation(55, 1, 54, 'out', '@out', 'genres_id_name_pair').
+annotation(56, 1, 55, 'out', '@out', 'production_companies_list').
+annotation(57, 1, 56, 'out', '@out', 'spoken_languages_list').
+annotation(58, 1, 57, 'out', '@out', 'production_countries_list').
+annotation(59, 1, 58, 'end', '@end', 'CreateCloneOfExistingColumn').
+annotation(60, 1, 60, 'begin', '@begin', 'CreateBinaryEncodedColumnsForEachGenre').
+annotation(61, 1, 60, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_movies.csv').
+annotation(62, 1, 61, 'in', '@in', 'genres').
+annotation(63, 1, 62, 'out', '@out', 'genre_type_action').
+annotation(64, 1, 63, 'out', '@out', 'genre_type_adventure').
+annotation(65, 1, 64, 'out', '@out', '...').
+annotation(66, 1, 65, 'out', '@out', 'genre_type_war').
+annotation(67, 1, 66, 'out', '@out', 'genre_type_western').
+annotation(68, 1, 67, 'end', '@end', 'CreateBinaryEncodedColumnsForEachGenre').
+annotation(69, 1, 69, 'begin', '@begin', 'ColumnTextTransformation_DomainExtraction').
+annotation(70, 1, 69, 'desc', '@desc', 'Use OpenRefine to clean tmdb_5000_movies.csv').
+annotation(71, 1, 70, 'in', '@in', 'homepage_domain').
+annotation(72, 1, 71, 'out', '@out', 'homepage_domain').
+annotation(73, 1, 72, 'end', '@end', 'ColumnTextTransformation_DomainExtraction').
+annotation(74, 1, 74, 'begin', '@begin', 'ColTextTransform_ToLowerCase').
+annotation(75, 1, 74, 'desc', '@desc', 'text to LowerCase').
+annotation(76, 1, 75, 'in', '@in', 'keywords').
+annotation(77, 1, 76, 'out', '@out', 'keywords').
+annotation(78, 1, 77, 'end', '@end', 'ColTextTransform_ToLowerCase').
+annotation(79, 1, 79, 'begin', '@begin', 'ColTextTransform_JSONtoSemicolonSepList').
+annotation(80, 1, 79, 'desc', '@desc', 'using grel:foreach method').
+annotation(81, 1, 80, 'in', '@in', 'keywords').
+annotation(82, 1, 81, 'in', '@in', 'production_companies_list').
+annotation(83, 1, 82, 'in', '@in', 'production_countries').
+annotation(84, 1, 83, 'out', '@out', 'keywords').
+annotation(85, 1, 84, 'out', '@out', 'production_companies_list').
+annotation(86, 1, 85, 'out', '@out', 'production_countries_list').
+annotation(87, 1, 86, 'end', '@end', 'ColTextTransform_ToLowerCase').
+annotation(88, 1, 88, 'begin', '@begin', 'ColTextTransform_RoundNumberUpto2Decimals').
+annotation(89, 1, 88, 'desc', '@desc', 'grel:(value*100).round()/100.0').
+annotation(90, 1, 89, 'in', '@in', 'popularity').
+annotation(91, 1, 90, 'out', '@out', 'popularity').
+annotation(92, 1, 91, 'end', '@end', 'ColTextTransform_RoundNumberUpto2Decimals').
+annotation(93, 1, 93, 'begin', '@begin', 'ColTextTransform_DateFormatChange').
+annotation(94, 1, 93, 'desc', '@desc', 'grel:(value*100).round()/100.0').
+annotation(95, 1, 94, 'in', '@in', 'release_date').
+annotation(96, 1, 95, 'out', '@out', 'release_date').
+annotation(97, 1, 96, 'end', '@end', 'ColTextTransform_DateFormatChange').
+annotation(98, 1, 98, 'begin', '@begin', 'ColTextTransform_ToNumber').
+annotation(99, 1, 98, 'desc', '@desc', 'using grel').
+annotation(100, 1, 99, 'in', '@in', 'revenue').
+annotation(101, 1, 100, 'out', '@out', 'revenue').
+annotation(102, 1, 101, 'end', '@end', 'ColTextTransform_ToNumber').
+annotation(103, 1, 103, 'begin', '@begin', 'ColTextTransform_Clustering').
+annotation(104, 1, 103, 'desc', '@desc', 'To make consistent wordings using keyCollision method').
+annotation(105, 1, 104, 'in', '@in', 'tagline').
+annotation(106, 1, 105, 'out', '@out', 'tagline').
+annotation(107, 1, 106, 'end', '@end', 'ColTextTransform_Clustering').
+annotation(108, 1, 108, 'end', '@end', 'TMDB_Movies_Datacleaning_Using_OpenRefine').
+
+% FACT: annotation_qualifies(qualifying_annotation_id, primary_annotation_id).
+annotation_qualifies(2, 1).
+annotation_qualifies(4, 3).
+annotation_qualifies(6, 5).
+annotation_qualifies(8, 7).
+annotation_qualifies(12, 11).
+annotation_qualifies(29, 28).
+annotation_qualifies(38, 37).
+annotation_qualifies(43, 42).
+annotation_qualifies(47, 46).
+annotation_qualifies(61, 60).
+annotation_qualifies(70, 69).
+annotation_qualifies(75, 74).
+annotation_qualifies(80, 79).
+annotation_qualifies(89, 88).
+annotation_qualifies(94, 93).
+annotation_qualifies(99, 98).
+annotation_qualifies(104, 103).

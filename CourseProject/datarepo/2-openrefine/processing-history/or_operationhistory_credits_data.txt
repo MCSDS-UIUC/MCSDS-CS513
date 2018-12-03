@@ -1,0 +1,54 @@
+[
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column title using expression value.trim()",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "title",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column title using expression grel:value.replace(/[\\%\\@\\#\\!\\\\\\[\\]\\(\\)\\?]/, \"\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "title",
+    "expression": "grel:value.replace(/[\\%\\@\\#\\!\\\\\\[\\]\\(\\)\\?]/, \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column cast_charactername_actorname at index 3 based on column cast using expression grel:forEach(value.parseJson(),v,v.character+\"-\"+v.name).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "cast_charactername_actorname",
+    "columnInsertIndex": 3,
+    "baseColumnName": "cast",
+    "expression": "grel:forEach(value.parseJson(),v,v.character+\"-\"+v.name).join(\";\")",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column crew_crewname_job at index 5 based on column crew using expression grel:forEach(value.parseJson(),v,v.name+\"-\"+v.job).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "crew_crewname_job",
+    "columnInsertIndex": 5,
+    "baseColumnName": "crew",
+    "expression": "grel:forEach(value.parseJson(),v,v.name+\"-\"+v.job).join(\";\")",
+    "onError": "set-to-blank"
+  }
+]

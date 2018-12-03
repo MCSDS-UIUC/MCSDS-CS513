@@ -1,0 +1,45 @@
+'''
+@begin TMDB_Movies_DataCleaning_Using_Pandas @desc Cleaning movies dataset using Pandas tool
+@in tmdb_5000_movies-OpenRefineProcessed.csv @uri file://tmdb_5000_movies-OpenRefineProcessed.csv
+
+#1
+@begin LoadDataUsingPandas @desc Use OpenRefine to clean tmdb_5000_movies-OpenRefineProcessed.csv
+@in tmdb_5000_movies-OpenRefineProcessed.csv @uri file://tmdb_5000_movies-OpenRefineProcessed.csv
+@out movies_data_in_pandas_dataframe
+@end LoadDataUsingPandas
+
+@begin IdentifyColumnsToProcessUsingPandas @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in movies_data_in_pandas_dataframe
+@out genres
+@out release_date
+@end IdentifyColumnsToProcessUsingPandas
+
+@begin CreateBinaryEncodedColumnsForEachGenre @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in genres
+@out genre_type_action
+@out genre_type_adventure
+@out ...17_others...
+@out genre_type_war
+@out genre_type_western
+@end CreateBinaryEncodedColumnsForEachGenre
+
+@begin FetchCorrectReleaseDataUsingTmdbAPI @desc using grel:foreach method
+@in release_date
+@out release_date
+@end FetchCorrectReleaseDataUsingTmdbAPI
+
+@begin AddNewProcessedColumnsToCreditsDataset @desc Add binary-encoded dereived columns from 'genres' and updated 'release date' to the movie dataset
+@in tmdb_5000_movies-OpenRefineProcessed.csv @uri file://tmdb_5000_movies-OpenRefineProcessed.csv
+@in genre_type_action
+@in genre_type_adventure
+@in ...17_others...
+@in genre_type_war
+@in genre_type_western
+@in release_date
+@out tmdb_5000_movies-OpenRefine-Pandas-Processed.csv @uri file://tmdb_5000_movies-OpenRefine-Pandas-Processed.csv
+@end AddNewProcessedColumnsToCreditsDataset
+
+@out tmdb_5000_movies-OpenRefine-Pandas-Processed.csv @uri file://tmdb_5000_movies-OpenRefine-Pandas-Processed.csv
+
+@end TMDB_Movies_Datacleaning_Using_Pandas
+'''

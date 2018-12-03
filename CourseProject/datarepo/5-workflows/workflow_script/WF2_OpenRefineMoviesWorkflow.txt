@@ -1,0 +1,109 @@
+'''
+@begin TMDB_Movies_Datacleaning_Using_OpenRefine @desc Cleaning movies dataset using OpenRefine tool
+@in tmdb_5000_movies.csv @uri file://tmdb_5000_movies.csv
+
+#1
+@begin LoadDataUsingOpenRefine @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in tmdb_5000_movies.csv @uri file://tmdb_5000_movies.csv
+@out movies_data_in_openrefine_workspace
+@end LoadDataUsingOpenRefine
+
+@begin IdentifyColumnsToCleanUsingOpenRefine @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in movies_data_in_openrefine_workspace
+@out genres
+@out homepage
+@out keywords
+@out original_title
+@out overview
+@out popularity
+@out production_companies
+@out production_countries
+@out release_date
+@out revenue
+@out spoken_languages
+@out tagline
+@out title
+@end IdentifyColumnsToCleanUsingOpenRefine
+
+@begin ColTextTransform_RemoveSpecialChars @desc Remove chars like - %,,@,/,#,!,[,],(,),\?
+@in original_title
+@in title
+@in overview
+@out original_title
+@out title
+@out overview
+@end ColTextTransform_RemoveSpecialChars
+
+@begin ColTextTransform_TrimSpaces @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in overview
+@out overview
+@end ColTextTransform_TrimSpaces
+
+@begin ColTextTransform_TrimSpaces @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in overview
+@end ColTextTransform_TrimSpaces
+
+@begin CreateCloneOfExistingColumn @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in homepage
+@in genres
+@in production_companies
+@in spoken_languages
+@in production_countries
+@out homepage_domain
+@out genres_list
+@out genres_id_name_pair
+@out production_companies_list
+@out spoken_languages_list
+@out production_countries_list
+@end CreateCloneOfExistingColumn
+
+@begin CreateBinaryEncodedColumnsForEachGenre @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in genres
+@out genre_type_action
+@out genre_type_adventure
+@out ...
+@out genre_type_war
+@out genre_type_western
+@end CreateBinaryEncodedColumnsForEachGenre
+
+@begin ColumnTextTransformation_DomainExtraction @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in homepage_domain
+@out homepage_domain
+@end ColumnTextTransformation_DomainExtraction
+
+@begin ColTextTransform_ToLowerCase @desc text to LowerCase
+@in keywords
+@out keywords
+@end ColTextTransform_ToLowerCase
+
+@begin ColTextTransform_JSONtoSemicolonSepList @desc using grel:foreach method
+@in keywords
+@in production_companies_list
+@in production_countries
+@out keywords
+@out production_companies_list
+@out production_countries_list
+@end ColTextTransform_ToLowerCase
+
+@begin ColTextTransform_RoundNumberUpto2Decimals @desc grel:(value*100).round()/100.0
+@in popularity
+@out popularity
+@end ColTextTransform_RoundNumberUpto2Decimals
+
+@begin ColTextTransform_DateFormatChange @desc grel:(value*100).round()/100.0
+@in release_date
+@out release_date
+@end ColTextTransform_DateFormatChange
+
+@begin ColTextTransform_ToNumber @desc using grel
+@in revenue
+@out revenue
+@end ColTextTransform_ToNumber
+
+@begin ColTextTransform_Clustering @desc To make consistent wordings using keyCollision method
+@in tagline
+@out tagline
+@end ColTextTransform_Clustering
+
+@end TMDB_Movies_Datacleaning_Using_OpenRefine
+'''

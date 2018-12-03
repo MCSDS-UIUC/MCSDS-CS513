@@ -1,0 +1,77 @@
+'''
+@begin Overall_TMDB_MoviesDataset_Cleaning @desc Overall Workflow for cleaning the TMDB dataset
+@in tmdb_5000_movies.csv @uri file://tmdb_5000_movies.csv
+@in tmdb_5000_credits.csv @uri file://tmdb_5000_credits.csv
+
+#1
+@begin CleaningMoviesDataUsingOpenRefine @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in tmdb_5000_movies.csv @uri file://tmdb_5000_movies.csv
+@out tmdb_5000_movies-OpenRefineProcessed.csv @uri file://tmdb_5000_movies-OpenRefineProcessed.csv
+@end CleaningMoviesDataUsingOpenRefine
+
+@begin CleaningMoviesDataUsingPandasAndTmdbAPI @desc Used Pandas and TMDB-REST-API to clean/update tmdb_5000_movies.csv
+@in tmdb_5000_movies-OpenRefineProcessed.csv @uri file://tmdb_5000_movies-OpenRefineProcessed.csv
+@out tmdb_5000_movies-OpenRefine-Pandas-Processed.csv @uri file://tmdb_5000_movies-OpenRefine-Pandas-Processed.csv
+@end CleaningMoviesDataUsingPandasAndTmdbAPI
+
+@begin CreateSQLiteMoviesTable @desc Define schema(without constraints) and load movies-data
+@in tmdb_5000_movies-OpenRefine-Pandas-Processed.csv @uri file://tmdb_5000_movies-OpenRefine-Pandas-Processed.csv
+@out movies @uri sqlite://cs513-moviesdb/tbl_movies
+@end CreateSQLiteMoviesTable
+
+@begin SQLConstraintsCheckMoviesData @desc Check SQL data/referential integrity constraints- Movies
+@in movies @uri sqlite://cs513-moviesdb/tbl_movies
+@out movies @uri sqlite://cs513-moviesdb/tbl_movies
+@end SQLConstraintsCheckMoviesData
+
+#2
+@begin CleaningCreditsDataUsingOpenRefine @desc Use OpenRefine to clean tmdb_5000_credits.csv
+@in tmdb_5000_credits.csv @uri file://tmdb_5000_credits.csv
+@out tmdb_5000_credits-OpenRefineProcessed.csv @uri file://tmdb_5000_credits-OpenRefineProcessed.csv
+@end CleaningCreditsDataUsingOpenRefine
+
+@begin CleaningCreditsDataUsingPandas @desc Use Pandas to create two new tables from the JSON data of 'Cast' and 'Crew' columns
+@in  tmdb_5000_credits-OpenRefineProcessed.csv @uri file://tmdb_5000_credits-OpenRefineProcessed.csv
+@out tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv @uri file://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv
+@out tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv @uri file://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv
+@end CleaningCreditsDataUsingPandas
+
+@begin CreateSQLiteCreditsTable @desc Define schema(without constraints) and load credits data
+@in tmdb_5000_credits-OpenRefineProcessed.csv @uri file://tmdb_5000_credits-OpenRefineProcessed.csv
+@out credits @uri sqlite://cs513-moviesdb/tbl_credits
+@end CreateSQLiteCreditsTable
+
+@begin CreateSQLiteCreditsCastTable @desc Define schema(without constraints) and load credits-cast data
+@in tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv @uri file://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv
+@out credits_cast @uri sqlite://cs513-moviesdb/tbl_credits_cast
+@end CreateSQLiteCreditsCastTable
+
+@begin CreateSQLiteCreditsCrewTable @desc Define schema(without constraints) and load crdits-crew data
+@in tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv @uri file://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv
+@out credits_crew @uri sqlite://cs513-moviesdb/tbl_credits_crew
+@end CreateSQLiteCreditsCrewTable
+
+#4
+
+@begin SQLConstraintsCheckCreditsData @desc Check SQL data/referential integrity constraints - Credits
+@in credits @uri sqlite://cs513-moviesdb/tbl_credits
+@out credits @uri sqlite://cs513-moviesdb/tbl_credits
+@end SQLConstraintsCheckCreditsData
+
+@begin SQLConstraintsCheckCreditsCastData @desc Check SQL data/referential integrity constraints - Credits
+@in credits_cast @uri sqlite://cs513-moviesdb/tbl_credits_cast
+@out credits_cast @uri sqlite://cs513-moviesdb/tbl_credits_cast
+@end SQLConstraintsCheckCreditsCastData
+
+@begin SQLConstraintsCheckCreditsCrewData @desc Check SQL data/referential integrity constraints - Credits
+@in credits_crew @uri sqlite://cs513-moviesdb/tbl_credits_crew
+@out credits_crew @uri sqlite://cs513-moviesdb/tbl_credits_crew
+@end SQLConstraintsCheckCreditsCrewData
+
+@out movies @uri sqlite://cs513-moviesdb/tbl_movies
+@out credits @uri sqlite://cs513-moviesdb/tbl_credits
+@out credits_cast @uri sqlite://cs513-moviesdb/tbl_credits_cast
+@out credits_crew @uri sqlite://cs513-moviesdb/tbl_credits_crew
+
+@end Overall_TMDB_MoviesDataset_Cleaning
+'''

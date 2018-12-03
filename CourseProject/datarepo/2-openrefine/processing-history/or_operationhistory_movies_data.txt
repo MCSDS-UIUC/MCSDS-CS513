@@ -1,0 +1,460 @@
+[
+  {
+    "op": "core/column-addition",
+    "description": "Create column genres_list at index 2 based on column genres using expression grel:value",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "genres_list",
+    "columnInsertIndex": 2,
+    "baseColumnName": "genres",
+    "expression": "grel:value",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column genres_list using expression grel:forEach(value.parseJson(),v,v.name).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "genres_list",
+    "expression": "grel:forEach(value.parseJson(),v,v.name).join(\";\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column keywords using expression grel:forEach(value.parseJson(),v,v.name).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "keywords",
+    "expression": "grel:forEach(value.parseJson(),v,v.name).join(\";\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column homepage_domain at index 4 based on column homepage using expression grel:value",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "homepage_domain",
+    "columnInsertIndex": 4,
+    "baseColumnName": "homepage",
+    "expression": "grel:value",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column homepage_domain using expression clojure:(.getHost(java.net.URI. value))",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "homepage_domain",
+    "expression": "clojure:(.getHost(java.net.URI. value))",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column overview using expression grel:value.replace(/[\\%\\@\\#\\!\\\\\\[\\]\\(\\)\\?]/, \"\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "overview",
+    "expression": "grel:value.replace(/[\\%\\@\\#\\!\\\\\\[\\]\\(\\)\\?]/, \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column popularity using expression value.toNumber()",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "popularity",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column popularity using expression grel:(value*100).round()/100.0",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "popularity",
+    "expression": "grel:(value*100).round()/100.0",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column tagline",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "tagline",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Based on a true story.",
+          "Based on a True Story",
+          "Based on a True Story."
+        ],
+        "to": "Based on a true story."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "One Hell of A Ride",
+          "One hell of a ride."
+        ],
+        "to": "One Hell of A Ride"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "The hunter becomes the hunted",
+          "The hunter becomes the hunted."
+        ],
+        "to": "The hunter becomes the hunted"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "No Soul Is Safe.",
+          "No soul is safe."
+        ],
+        "to": "No Soul Is Safe."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Some Men Are Born To Be Heroes.",
+          "Some Men Are Born to be Heroes"
+        ],
+        "to": "Some Men Are Born To Be Heroes."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "One person can change your life forever",
+          "One person can change your life forever."
+        ],
+        "to": "One person can change your life forever"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "The world is yours.",
+          "The world is yours..."
+        ],
+        "to": "The world is yours."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Kill or be Killed.",
+          "Kill or be killed!"
+        ],
+        "to": "Kill or be Killed."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "All you need is love.",
+          "love is all you need"
+        ],
+        "to": "All you need is love."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "The Adventure Continues...",
+          "The adventure continues . . ."
+        ],
+        "to": "The Adventure Continues..."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "...Everything you've heard is true",
+          "Everything You've Heard is True"
+        ],
+        "to": "...Everything you've heard is true"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "The Hunt Is On",
+          "The hunt is on."
+        ],
+        "to": "The Hunt Is On"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Everything is Connected",
+          "Everything is connected."
+        ],
+        "to": "Everything is Connected"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "No Gut... No Glory.",
+          "No gut, no glory"
+        ],
+        "to": "No Gut... No Glory."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "The End Begins",
+          "The End Begins."
+        ],
+        "to": "The End Begins"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Be careful what you wish for.",
+          "Be careful what you wish for..."
+        ],
+        "to": "Be careful what you wish for."
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Houston, we have a problem!",
+          "Houston, we have a problem."
+        ],
+        "to": "Houston, we have a problem!"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Looks Can Kill",
+          "Looks can kill"
+        ],
+        "to": "Looks Can Kill"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Misery loves family",
+          "Misery loves family."
+        ],
+        "to": "Misery loves family"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "Work sucks!",
+          "Work sucks."
+        ],
+        "to": "Work sucks!"
+      }
+    ]
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column original_title using expression grel:value.replace(/[\\%\\@\\#\\!\\\\\\[\\]\\(\\)\\?]/, \"\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "original_title",
+    "expression": "grel:value.replace(/[\\%\\@\\#\\!\\\\\\[\\]\\(\\)\\?]/, \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column production_companies_list at index 12 based on column production_companies using expression grel:forEach(value.parseJson(),v,v.name).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "production_companies_list",
+    "columnInsertIndex": 12,
+    "baseColumnName": "production_companies",
+    "expression": "grel:forEach(value.parseJson(),v,v.name).join(\";\")",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column production_countrycode_list at index 14 based on column production_countries using expression grel:forEach(value.parseJson(),v,v.iso_3166_1).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "production_countrycode_list",
+    "columnInsertIndex": 14,
+    "baseColumnName": "production_countries",
+    "expression": "grel:forEach(value.parseJson(),v,v.iso_3166_1).join(\";\")",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column release_date using expression grel:value.toDate('d/M/y').toString('yyyy-MM-dd')",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "release_date",
+    "expression": "grel:value.toDate('d/M/y').toString('yyyy-MM-dd')",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column overview using expression value.trim()",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "overview",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column revenue using expression value.toNumber()",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "revenue",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column spoken_languages_list at index 19 based on column spoken_languages using expression grel:forEach(value.parseJson(),v,v.iso_639_1).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "spoken_languages_list",
+    "columnInsertIndex": 19,
+    "baseColumnName": "spoken_languages",
+    "expression": "grel:forEach(value.parseJson(),v,v.iso_639_1).join(\";\")",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column title using expression grel:value.replace(/[\\%\\@\\#\\!\\\\\\[\\]\\(\\)\\?]/, \"\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "title",
+    "expression": "grel:value.replace(/[\\%\\@\\#\\!\\\\\\[\\]\\(\\)\\?]/, \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column keywords using expression value.toLowercase()",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "keywords",
+    "expression": "value.toLowercase()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column genres_id_name_pair at index 2 based on column genres using expression grel:forEach(value.parseJson(),v,v.id+'-'+v.name).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "genres_id_name_pair",
+    "columnInsertIndex": 2,
+    "baseColumnName": "genres",
+    "expression": "grel:forEach(value.parseJson(),v,v.id+'-'+v.name).join(\";\")",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column production_companies_id_name_pair at index 13 based on column production_companies using expression grel:forEach(value.parseJson(),v,v.id+'|'+v.name).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "production_companies_id_name_pair",
+    "columnInsertIndex": 13,
+    "baseColumnName": "production_companies",
+    "expression": "grel:forEach(value.parseJson(),v,v.id+'|'+v.name).join(\";\")",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column genres_id_name_pair",
+    "columnName": "genres_id_name_pair"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column genres_id_name_pair at index 2 based on column genres using expression grel:forEach(value.parseJson(),v,v.id+\"|\"+v.name).join(\";\")",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "genres_id_name_pair",
+    "columnInsertIndex": 2,
+    "baseColumnName": "genres",
+    "expression": "grel:forEach(value.parseJson(),v,v.id+\"|\"+v.name).join(\";\")",
+    "onError": "set-to-blank"
+  }
+]

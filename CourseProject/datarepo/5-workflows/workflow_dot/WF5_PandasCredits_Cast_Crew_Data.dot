@@ -1,0 +1,74 @@
+
+/* Start of top-level graph */
+digraph Workflow {
+rankdir=TB
+
+/* Title for graph */
+fontname=Helvetica; fontsize=18; labelloc=t
+label=TMDB_Process_CreditsData_UsingPandas
+
+/* Start of double cluster for drawing box around nodes in workflow */
+subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
+subgraph cluster_workflow_box_inner { label=""; penwidth=0
+
+/* Style for nodes representing atomic programs in workflow */
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Helvetica]
+
+/* Nodes representing atomic programs in workflow */
+LoadDataUsingOpenRefine [shape=record rankdir=LR label="{<f0> LoadDataUsingOpenRefine |<f1> Use OpenRefine to clean tmdb_5000_movies.csv}"];
+IdentifyColumnsToCleanUsingOpenRefine [shape=record rankdir=LR label="{<f0> IdentifyColumnsToCleanUsingOpenRefine |<f1> Use OpenRefine to clean tmdb_5000_movies.csv}"];
+Create_NewTabluarDataFromJsonArray_Cast [shape=record rankdir=LR label="{<f0> Create_NewTabluarDataFromJsonArray_Cast |<f1> Add new tabular data with columns (cast_id,character,credit_id,gender,id,movie_id,movie_title,name,order)}"];
+Create_NewTabluarDataFromJsonArray_Crew [shape=record rankdir=LR label="{<f0> Create_NewTabluarDataFromJsonArray_Crew |<f1> Add new tabular data with columns (credit_id,department,gender id,job,movie_id,movie_title,name)}"];
+
+/* Style for nodes representing non-parameter data channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
+
+/* Nodes for non-parameter data channels in workflow */
+"tmdb_5000_credits-OpenRefineProcessed.csv" [shape=record rankdir=LR label="{<f0> tmdb_5000_credits-OpenRefineProcessed.csv |<f1> file\://tmdb_5000_credits-OpenRefineProcessed.csv}"];
+credits_data_in_pandas_dataframe
+cast
+crew
+"tmdb_5000_credits-cast-OpenRefine-Pandas-Processed" [shape=record rankdir=LR label="{<f0> tmdb_5000_credits-cast-OpenRefine-Pandas-Processed |<f1> file\://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv}"];
+"tmdb_5000_credits-crew-OpenRefine-Pandas-Processed" [shape=record rankdir=LR label="{<f0> tmdb_5000_credits-crew-OpenRefine-Pandas-Processed |<f1> file\://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv}"];
+
+/* Style for nodes representing parameter channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
+
+/* Nodes representing parameter channels in workflow */
+
+/* Edges representing connections between programs and channels */
+LoadDataUsingOpenRefine -> credits_data_in_pandas_dataframe
+"tmdb_5000_credits-OpenRefineProcessed.csv" -> LoadDataUsingOpenRefine
+IdentifyColumnsToCleanUsingOpenRefine -> cast
+IdentifyColumnsToCleanUsingOpenRefine -> crew
+credits_data_in_pandas_dataframe -> IdentifyColumnsToCleanUsingOpenRefine
+Create_NewTabluarDataFromJsonArray_Cast -> "tmdb_5000_credits-cast-OpenRefine-Pandas-Processed"
+cast -> Create_NewTabluarDataFromJsonArray_Cast
+Create_NewTabluarDataFromJsonArray_Crew -> "tmdb_5000_credits-crew-OpenRefine-Pandas-Processed"
+crew -> Create_NewTabluarDataFromJsonArray_Crew
+
+/* End of double cluster for drawing box around nodes in workflow */
+}}
+
+/* Style for nodes representing workflow input ports */
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+
+/* Nodes representing workflow input ports */
+"tmdb_5000_credits-OpenRefineProcessed.csv_input_port" [label=""]
+
+/* Style for nodes representing workflow output ports */
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+
+/* Nodes representing workflow output ports */
+"tmdb_5000_credits-cast-OpenRefine-Pandas-Processed_output_port" [label=""]
+"tmdb_5000_credits-crew-OpenRefine-Pandas-Processed_output_port" [label=""]
+
+/* Edges from input ports to channels */
+"tmdb_5000_credits-OpenRefineProcessed.csv_input_port" -> "tmdb_5000_credits-OpenRefineProcessed.csv"
+
+/* Edges from channels to output ports */
+"tmdb_5000_credits-cast-OpenRefine-Pandas-Processed" -> "tmdb_5000_credits-cast-OpenRefine-Pandas-Processed_output_port"
+"tmdb_5000_credits-crew-OpenRefine-Pandas-Processed" -> "tmdb_5000_credits-crew-OpenRefine-Pandas-Processed_output_port"
+
+/* End of top-level graph */
+}

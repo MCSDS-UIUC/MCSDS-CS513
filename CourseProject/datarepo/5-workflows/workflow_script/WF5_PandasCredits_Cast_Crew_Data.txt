@@ -1,0 +1,31 @@
+'''
+@begin TMDB_Process_CreditsData_UsingPandas @desc Cleaning credits dataset using OpenRefine tool
+@in tmdb_5000_credits-OpenRefineProcessed.csv @uri file://tmdb_5000_credits-OpenRefineProcessed.csv
+
+#1
+@begin LoadDataUsingOpenRefine @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in tmdb_5000_credits-OpenRefineProcessed.csv @uri file://OpenRefineProcessed.csv
+@out credits_data_in_pandas_dataframe
+@end LoadDataUsingOpenRefine
+
+@begin IdentifyColumnsToCleanUsingOpenRefine @desc Use OpenRefine to clean tmdb_5000_movies.csv
+@in credits_data_in_pandas_dataframe
+@out cast
+@out crew
+@end IdentifyColumnsToCleanUsingOpenRefine
+
+@begin Create_NewTabluarDataFromJsonArray_Cast @desc Add new tabular data with columns (cast_id,character,credit_id,gender,id,movie_id,movie_title,name,order)
+@in cast
+@out tmdb_5000_credits-cast-OpenRefine-Pandas-Processed @uri file://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv
+@end   Create_NewTabluarDataFromJsonArray_Cast
+
+@begin Create_NewTabluarDataFromJsonArray_Crew @desc Add new tabular data with columns (credit_id,department,gender	id,job,movie_id,movie_title,name)
+@in crew
+@out tmdb_5000_credits-crew-OpenRefine-Pandas-Processed @uri file://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv
+@end   Create_NewTabluarDataFromJsonArray_Cast
+
+@out tmdb_5000_credits-cast-OpenRefine-Pandas-Processed @uri file://tmdb_5000_credits-cast-OpenRefine-Pandas-Processed.csv
+@out tmdb_5000_credits-crew-OpenRefine-Pandas-Processed @uri file://tmdb_5000_credits-crew-OpenRefine-Pandas-Processed.csv
+
+@end TMDB_Process_CreditsData_UsingPandas
+'''
