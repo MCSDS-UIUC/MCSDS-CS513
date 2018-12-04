@@ -18,9 +18,11 @@ Ref - https://www.kaggle.com/tmdb/tmdb-movie-metadata
 -	Get rid of JSON values and create normalized tables where possible. 
 
 ## Attribution
+
+-	Data source - https://www.kaggle.com/tmdb/tmdb-movie-metadata/home 
 -	In this project, ‘themoviedb’ API is used to source correct movie-release-dates of 14 movies.
 We are thankful to ‘themoviedb’ for letting us use their great APIs.
-![themoviedb logo](https://github.com/manas-mukherjee/MCSDS-CS513/blob/master/CourseProject/datarepo/5-workflows/workflow_images/tmdb_attribution_logo.png)
 Ref -  https://www.themoviedb.org/about/logos-attribution 
--	Data source - https://www.kaggle.com/tmdb/tmdb-movie-metadata/home 
+![themoviedb logo](https://github.com/manas-mukherjee/MCSDS-CS513/blob/master/CourseProject/datarepo/5-workflows/workflow_images/tmdb_attribution_logo.png)
+
 
