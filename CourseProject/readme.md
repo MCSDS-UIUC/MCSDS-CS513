@@ -7,6 +7,9 @@
 This is the final project report of the ‘CS-513 – Theory and Practice of Data Cleaning’ course. 
 This project has practical application of all the tools and techniques like OpenRefine, SQLite, YesWorkflow etc which were taught by the professor in this graduate course. The ‘5000 Movies’ dataset is obtained from the Kaggle website. 
 
+## Report 
+https://github.com/manas-mukherjee/MCSDS-CS513/blob/master/CourseProject/report/FinalCourseProjectReport-ManasMukherjee.pdf
+
 ## Data Source 
 This dataset is taken from the Kaggle’s website. 
 Ref - https://www.kaggle.com/tmdb/tmdb-movie-metadata 
